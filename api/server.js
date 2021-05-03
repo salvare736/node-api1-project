@@ -16,7 +16,7 @@ server.get('/api/users', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({
-                error: 'something went wrong getting all users',
+                error: 'The users information could not be retrieved',
                 message: err.message,
                 stack: err.stack
             })
