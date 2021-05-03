@@ -44,4 +44,25 @@ server.get('/api/users/:id', (req, res) => {
         })
 })
 
+server.post('/api/users', (req, res) => {
+    User.insert(req.body)
+        .then(newUser => {
+            if (!req.body.name || !req.body.bio) {
+                res.status(400).json({
+                    message: 'Please provide name and bio for the user'
+                })
+            } else {
+                // console.log(newUser)
+                res.json(newUser)
+            }
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: 'There was an error while saving the user to the database',
+                message: err.message,
+                stack: err.stack
+            })
+        })
+})
+
 module.exports = server; // EXPORT YOUR SERVER instead of {}
